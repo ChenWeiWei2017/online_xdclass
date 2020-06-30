@@ -9,6 +9,7 @@ import xyz.chenww.online_xdclass.utils.CommonUtil;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @Slf4j
@@ -31,5 +32,15 @@ public class UserMapperTest {
         } catch (DuplicateKeyException e) {
             log.error("用户名或手机号已存在！" , e);
         }
+    }
+
+    @Test
+    public void testSelectUser() {
+        User user = new User();
+//        user.setId(17);
+        user.setName("陈伟伟");
+        user.setPwd(CommonUtil.MD5("123456@Abc"));
+        List<User> users = userMapper.selectByScope(user);
+        System.out.println(users);
     }
 }

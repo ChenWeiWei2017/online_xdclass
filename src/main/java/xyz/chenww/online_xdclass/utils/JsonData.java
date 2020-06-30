@@ -65,7 +65,7 @@ public class JsonData {
         BAD_REQUEST(400, "请求参数或格式错误"),
         NOT_FOUND(404, "404 Not Found"),
         INTERNAL_SERVER_ERROR(500, "服务器异常"),
-        LOGIN_FAILED(-1, "用户登录失败，用户名或密码错误"),
+        LOGIN_FAILED(-1, "用户登录失败，账号或密码错误"),
         INVALID_LOGIN_STATUS(401, "登录状态失效"),
         NOT_LOGIN(402, "用户未登录"),
         NO_ACCESS(403, "无权访问"),

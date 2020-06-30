@@ -1,7 +1,10 @@
 package xyz.chenww.online_xdclass.utils;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Random;
@@ -48,5 +51,20 @@ public class CommonUtil {
     public static String getRandomHeadImg() {
         int randomIndex = new Random().nextInt(HEAD_IMG.length);
         return HEAD_IMG[randomIndex];
+    }
+
+    /**
+     * 将对象以Json形式传递给前端
+     */
+    public static void sendJsonMessage(HttpServletResponse response, Object object) {
+        try {
+            response.setContentType("application/json;charset=utf-8");
+            PrintWriter writer = response.getWriter();
+            writer.print(JSON.toJSONString(object));
+            writer.close();
+            response.flushBuffer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
