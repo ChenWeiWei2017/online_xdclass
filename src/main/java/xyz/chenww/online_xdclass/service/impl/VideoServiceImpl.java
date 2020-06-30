@@ -2,8 +2,8 @@ package xyz.chenww.online_xdclass.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
-import xyz.chenww.online_xdclass.domain.Video;
-import xyz.chenww.online_xdclass.domain.VideoBanner;
+import xyz.chenww.online_xdclass.model.entity.Video;
+import xyz.chenww.online_xdclass.model.entity.VideoBanner;
 import xyz.chenww.online_xdclass.mapper.VideoBannerMapper;
 import xyz.chenww.online_xdclass.mapper.VideoMapper;
 import xyz.chenww.online_xdclass.service.VideoService;

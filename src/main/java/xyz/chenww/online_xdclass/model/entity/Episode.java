@@ -1,4 +1,4 @@
-package xyz.chenww.online_xdclass.domain;
+package xyz.chenww.online_xdclass.model.entity;
 
 import lombok.Data;
 

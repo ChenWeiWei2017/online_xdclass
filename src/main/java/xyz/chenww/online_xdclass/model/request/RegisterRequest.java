@@ -1,4 +1,4 @@
-package xyz.chenww.online_xdclass.form;
+package xyz.chenww.online_xdclass.model.request;
 
 import lombok.Data;
 
@@ -7,10 +7,13 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * 用户注册表单
+ * 功能描述：注册请求表单数据
+ *
+ * @author chenweiwei
+ * @since 2020/6/30
  */
 @Data
-public class UserRegisterForm {
+public class RegisterRequest {
 
     @NotBlank(message = "用户名不能为空")
     // 长度校验
@@ -25,5 +28,4 @@ public class UserRegisterForm {
     @NotBlank(message = "手机号不能为空")
     @Pattern(regexp = "^[1](([3][0-9])|([4][0-1,4-9])|([5][0-3,5-9])|([6][2,5-7])|([7][0-8])|([8][0-9])|([9][0-3,5-9]))[0-9]{8}$", message = "手机号格式错误")
     private String phone;
-
 }

@@ -3,7 +3,7 @@ package xyz.chenww.online_xdclass.utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import xyz.chenww.online_xdclass.domain.User;
+import xyz.chenww.online_xdclass.model.entity.User;
 
 import java.util.Date;
 

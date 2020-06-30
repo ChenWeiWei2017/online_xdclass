@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
-import xyz.chenww.online_xdclass.domain.User;
+import xyz.chenww.online_xdclass.model.entity.User;
 import xyz.chenww.online_xdclass.utils.CommonUtil;
 
 import javax.annotation.Resource;

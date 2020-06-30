@@ -2,7 +2,7 @@ package xyz.chenww.online_xdclass.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
-import xyz.chenww.online_xdclass.domain.User;
+import xyz.chenww.online_xdclass.model.entity.User;
 
 public interface UserMapper {
 

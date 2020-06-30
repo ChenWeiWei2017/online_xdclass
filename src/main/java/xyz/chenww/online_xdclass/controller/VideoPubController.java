@@ -2,8 +2,8 @@ package xyz.chenww.online_xdclass.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
-import xyz.chenww.online_xdclass.domain.Video;
-import xyz.chenww.online_xdclass.domain.VideoBanner;
+import xyz.chenww.online_xdclass.model.entity.Video;
+import xyz.chenww.online_xdclass.model.entity.VideoBanner;
 import xyz.chenww.online_xdclass.service.VideoService;
 import xyz.chenww.online_xdclass.utils.JsonData;
 

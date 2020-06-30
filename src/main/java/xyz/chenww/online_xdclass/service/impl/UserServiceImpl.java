@@ -2,9 +2,9 @@ package xyz.chenww.online_xdclass.service.impl;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import xyz.chenww.online_xdclass.domain.User;
-import xyz.chenww.online_xdclass.form.UserRegisterForm;
+import xyz.chenww.online_xdclass.model.entity.User;
 import xyz.chenww.online_xdclass.mapper.UserMapper;
+import xyz.chenww.online_xdclass.model.request.RegisterRequest;
 import xyz.chenww.online_xdclass.service.UserService;
 import xyz.chenww.online_xdclass.utils.CommonUtil;
 
@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public void addUser(UserRegisterForm userInfo) throws DuplicateKeyException {
+    public void addUser(RegisterRequest userInfo) throws DuplicateKeyException {
         // 封装User对象
         User user = new User();
         user.setName(userInfo.getUsername());

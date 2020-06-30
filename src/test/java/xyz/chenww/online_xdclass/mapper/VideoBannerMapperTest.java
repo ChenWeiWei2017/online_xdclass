@@ -3,7 +3,7 @@ package xyz.chenww.online_xdclass.mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import xyz.chenww.online_xdclass.domain.VideoBanner;
+import xyz.chenww.online_xdclass.model.entity.VideoBanner;
 
 import javax.annotation.Resource;
 import java.util.List;

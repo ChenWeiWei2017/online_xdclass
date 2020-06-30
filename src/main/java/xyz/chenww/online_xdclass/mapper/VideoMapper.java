@@ -1,7 +1,7 @@
 package xyz.chenww.online_xdclass.mapper;
 
 import org.apache.ibatis.annotations.Select;
-import xyz.chenww.online_xdclass.domain.Video;
+import xyz.chenww.online_xdclass.model.entity.Video;
 
 import java.util.List;
 

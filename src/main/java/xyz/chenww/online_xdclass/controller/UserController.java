@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.chenww.online_xdclass.form.UserRegisterForm;
+import xyz.chenww.online_xdclass.model.request.RegisterRequest;
 import xyz.chenww.online_xdclass.service.UserService;
 import xyz.chenww.online_xdclass.utils.JsonData;
 
@@ -22,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("register")
-    public JsonData register(@Validated @RequestBody(required = false) UserRegisterForm userInfo, BindingResult errors) {
+    public JsonData register(@Validated @RequestBody(required = false) RegisterRequest userInfo, BindingResult errors) {
         if (userInfo == null) {
             return JsonData.buildByStatus(JsonData.Status.BAD_REQUEST, "用户信息不能为空");
         }
