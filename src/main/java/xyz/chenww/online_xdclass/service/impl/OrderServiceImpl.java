@@ -1,11 +1,16 @@
 package xyz.chenww.online_xdclass.service.impl;
 
 import org.springframework.stereotype.Service;
+import xyz.chenww.online_xdclass.exception.XDException;
+import xyz.chenww.online_xdclass.mapper.PlayRecordMapper;
 import xyz.chenww.online_xdclass.mapper.VideoMapper;
 import xyz.chenww.online_xdclass.mapper.VideoOrderMapper;
+import xyz.chenww.online_xdclass.model.entity.Episode;
+import xyz.chenww.online_xdclass.model.entity.PlayRecord;
 import xyz.chenww.online_xdclass.model.entity.Video;
 import xyz.chenww.online_xdclass.model.entity.VideoOrder;
 import xyz.chenww.online_xdclass.service.OrderService;
+import xyz.chenww.online_xdclass.service.VideoService;
 import xyz.chenww.online_xdclass.utils.Constant;
 
 import javax.annotation.Resource;
@@ -26,6 +31,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     private VideoMapper videoMapper;
+
+    private PlayRecordMapper playRecordMapper;
+
+    private final VideoService videoService;
+
+    public OrderServiceImpl(VideoService videoService) {
+        this.videoService = videoService;
+    }
 
     /**
      * 下单操作
@@ -59,7 +72,27 @@ public class OrderServiceImpl implements OrderService {
         videoOrder.setVideoImg(video.getCoverImg());
 
         videoOrderMapper.save(videoOrder);
+
         // 如果下单成功，则会将自动生成的id传给videoOrder
-        return videoOrder.getId() != null && videoOrder.getId() > 0 ? 1 : 0;
+        if (videoOrder.getId() != null && videoOrder.getId() > 0) {
+            // 下单购买成功后，默认生成一条初始的播放记录，便于用户学习已购买的课程
+            Episode firstEpisode = videoService.findFirstEpisodeInVideo(videoId);
+            if (firstEpisode == null) {
+                // 无集数信息，抛出异常
+                throw new XDException(-2, "视频信息不完整，请联系运营人员进行检测");
+            }
+            PlayRecord playRecord = new PlayRecord();
+            playRecord.setUserId(userId);
+            playRecord.setVideoId(videoId);
+            playRecord.setCurrentNum(1);
+            playRecord.setEpisodeId(firstEpisode.getId());
+            playRecord.setCreateTime(new Date());
+
+            playRecordMapper.save(playRecord);
+
+            return playRecord.getId() != null && playRecord.getId() > 0 ? 1 : 0;
+        }
+
+        return 0;
     }
 }

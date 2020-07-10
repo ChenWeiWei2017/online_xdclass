@@ -1,5 +1,6 @@
 package xyz.chenww.online_xdclass.service;
 
+import xyz.chenww.online_xdclass.model.entity.Episode;
 import xyz.chenww.online_xdclass.model.entity.Video;
 import xyz.chenww.online_xdclass.model.entity.VideoBanner;
 
@@ -34,4 +35,10 @@ public interface VideoService {
      * @return 视频对象，包含chapterList内容
      */
     Video findVideoDetailById(int videoId);
+
+    /**
+     * 获取指定视频的第一集信息
+     * @param videoId 视频Id
+     */
+    Episode findFirstEpisodeInVideo(int videoId);
 }

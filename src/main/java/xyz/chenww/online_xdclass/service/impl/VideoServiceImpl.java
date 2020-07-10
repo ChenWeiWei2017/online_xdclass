@@ -2,6 +2,8 @@ package xyz.chenww.online_xdclass.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
+import xyz.chenww.online_xdclass.mapper.EpisodeMapper;
+import xyz.chenww.online_xdclass.model.entity.Episode;
 import xyz.chenww.online_xdclass.model.entity.Video;
 import xyz.chenww.online_xdclass.model.entity.VideoBanner;
 import xyz.chenww.online_xdclass.mapper.VideoBannerMapper;
@@ -26,6 +28,9 @@ public class VideoServiceImpl implements VideoService {
     @Resource
     private VideoBannerMapper videoBannerMapper;
 
+    @Resource
+    private EpisodeMapper episodeMapper;
+
     @Override
     public List<VideoBanner> listVideoBanners(int num) {
         return videoBannerMapper.findBanners(num);
@@ -41,4 +46,10 @@ public class VideoServiceImpl implements VideoService {
     public Video findVideoDetailById(int videoId) {
         return videoMapper.findDetailById(videoId);
     }
+
+    @Override
+    public Episode findFirstEpisodeInVideo(int videoId) {
+        return episodeMapper.findByVideoIdAndNum(videoId, 1);
+    }
+
 }
