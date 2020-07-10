@@ -26,11 +26,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("register")
-    public JsonData register(@Validated @RequestBody RegisterRequest userInfo, BindingResult errors) {
+    public JsonData register(@Validated @RequestBody RegisterRequest userInfo) {
         // 参数校验结果分析，返回错误信息
-        if (errors.hasErrors()) {
-            return JsonData.buildByStatus(JsonData.Status.BAD_REQUEST, errors.getAllErrors().get(0).getDefaultMessage());
-        }
         try {
             userService.addUser(userInfo);
         } catch (DuplicateKeyException e) {
