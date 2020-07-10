@@ -32,18 +32,14 @@ public class CustomExceptionHandler {
      * @param e 校验异常
      * @return 反给前端的错误信息
      */
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public JsonData handleValidate(MethodArgumentNotValidException e) {
-        BindingResult result = e.getBindingResult();
-        if (result.hasErrors()) {
-            return JsonData.buildByStatus(JsonData.Status.BAD_REQUEST, result.getAllErrors().get(0).getDefaultMessage());
+    @ExceptionHandler(value = { MethodArgumentNotValidException.class, BindException.class })
+    public JsonData handleValidate(Exception e) {
+        BindingResult result;
+        if (e instanceof MethodArgumentNotValidException) {
+            result = ((MethodArgumentNotValidException) e).getBindingResult();
+        } else {
+            result = ((BindException) e).getBindingResult();
         }
-        return JsonData.buildByStatus(JsonData.Status.BAD_REQUEST, "缺少必要参数");
-    }
-
-    @ExceptionHandler(value = BindException.class)
-    public JsonData handleValidate(BindException e) {
-        BindingResult result = e.getBindingResult();
         if (result.hasErrors()) {
             return JsonData.buildByStatus(JsonData.Status.BAD_REQUEST, result.getAllErrors().get(0).getDefaultMessage());
         }
