@@ -1,6 +1,7 @@
 package xyz.chenww.online_xdclass.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.chenww.online_xdclass.exception.XDException;
 import xyz.chenww.online_xdclass.mapper.PlayRecordMapper;
 import xyz.chenww.online_xdclass.mapper.VideoMapper;
@@ -15,6 +16,7 @@ import xyz.chenww.online_xdclass.utils.Constant;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -32,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private VideoMapper videoMapper;
 
+    @Resource
     private PlayRecordMapper playRecordMapper;
 
     private final VideoService videoService;
@@ -48,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
      * @return 1: 成功；其他: 失败，目前只有一个0，如果有完整的逻辑，则可以定义多个错误状态码并返回具体的下单失败信息
      */
     @Override
+    @Transactional
     public int save(int userId, int videoId) {
         // 1.判断用户是否已经购买该视频，一个用户同一个视频只能购买一次
         VideoOrder videoBuy = videoOrderMapper.findByUserIdAndVideoIdAndState(userId, videoId, Constant.PayState.HAS_PAY.getValue());
@@ -94,5 +98,10 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return 0;
+    }
+
+    @Override
+    public List<VideoOrder> listOrderByUserId(Integer userId) {
+        return videoOrderMapper.findByUserId(userId);
     }
 }
