@@ -1,5 +1,7 @@
 package xyz.chenww.online_xdclass.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,9 +21,12 @@ public class User {
 
     private String pwd;
 
+    @JsonProperty("head_img")
     private String headImg;
 
     private String phone;
 
+    @JsonProperty("create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GTM+8")
     private Date createTime;
 }
