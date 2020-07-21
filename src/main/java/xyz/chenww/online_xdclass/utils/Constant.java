@@ -38,4 +38,22 @@ public class Constant {
             this.name = name;
         }
     }
+
+    public enum CacheKey {
+        INDEX_BANNER_KEY("index:banner:list"),
+        INDEX_VIDEO_LIST_KEY("index:video:list"),
+        VIDEO_DETAIL("video:detail:%s"),
+        ;
+
+        private final String key;
+
+        CacheKey(String key) {
+            this.key = key;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+    }
 }
