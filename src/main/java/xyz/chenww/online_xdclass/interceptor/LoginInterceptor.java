@@ -2,6 +2,7 @@ package xyz.chenww.online_xdclass.interceptor;
 
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import xyz.chenww.online_xdclass.utils.CommonUtil;
 import xyz.chenww.online_xdclass.utils.JWTUtil;
@@ -20,6 +21,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        /*
+         * options 跨域预检请求的处理，直接放行
+         * 本项目是使用token的，token放在header或参数中，options请求可以携带
+         * 如果是使用session校验，则需要cookie信息，而options不能携带cookie
+         * 所以对于使用session进行登录校验的(前后端分离)项目中，这个还是要配置的
+         */
+        if (HttpMethod.OPTIONS.toString().equalsIgnoreCase(request.getMethod())) {
+            return true;
+        }
         try {
             String token = request.getHeader("token");
             if (token == null) {
